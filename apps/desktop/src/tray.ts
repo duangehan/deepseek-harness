@@ -31,11 +31,11 @@ export class DesktopTray {
     const tray = this.tray
     if (tray === undefined) return
     const { messages } = this.options.locale()
-    tray.setToolTip(messages.aboutProduct)
+    tray.setToolTip('changhangzhiyou harness')
     tray.setContextMenu(Menu.buildFromTemplate([
-      { label: messages.openApplication, click: () => { this.options.open() } },
+      { label: messages.trayOpen, click: () => { this.options.open() } },
       { type: 'separator' },
-      { label: messages.quitApplication, click: () => { this.options.quit() } },
+      { label: messages.trayQuit, click: () => { this.options.quit() } },
     ]))
   }
 
