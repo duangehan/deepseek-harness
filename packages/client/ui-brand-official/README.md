@@ -9,7 +9,7 @@ English | [中文](README.zh.md)
 
 ## Summary
 
-This package supplies a click-triggered pixel whale on the blank home and gives an `official` client build the DeepSeek Harness sidebar artwork. The shipped Web and Desktop compositions load it by default. Other build profiles retain their existing branding. The hero mark stays on its animated fish fallback. The background owns only temporary canvas resources and adds no model requests.
+The shipped Web and Desktop compositions use this package for the Changxing Zhiyou (长行智友) sidebar name and mascot, the new conversation mark, and the click-triggered home whale.
 
 ## Table of Contents
 
@@ -25,11 +25,11 @@ This package supplies a click-triggered pixel whale on the blank home and gives 
 <a id="use-this-package"></a>
 ## Use this package
 
-The shipped Web and Desktop compositions already mount this plugin. Home feedback needs no extra installation or enablement; an `official` client build also registers the DeepSeek sidebar artwork.
+The shipped Web and Desktop compositions mount this plugin in every build profile.
 
-### Choosing the profile
+### Logo sizes
 
-`DSH_CLIENT_BUILD_PROFILE` selects which brand renders. An `official` build shows the official sidebar mark and name; any other value leaves the shell fallbacks — the fish mark and the local-build label — in place. The conversation hero shows the animated hero fish from `dsh-client-ui-conversation` regardless of profile, because that fallback is already the official mark. The plugin still loads and validates in both cases; only the sidebar artwork registration is profile-gated; the home background is shared across build profiles.
+The host requests a 24-pixel sidebar mark and a 34-pixel new conversation mark.
 
 ### Home feedback
 
@@ -41,7 +41,7 @@ The artwork values are fixed and the row takes no configuration. This is built-i
 
 ### Replacing the brand
 
-A deployment with its own identity leaves this package out and composes another package that occupies the sidebar slots and the `conversation.hero.frame` layer — and the hero-mark slot, which this package leaves on its fallback. Occupying a slot is the only composition route; the artwork identity is not configurable.
+To supply another identity, compose a plugin that fills the sidebar name and mark and the `conversation.hero.brand.mark` slot.
 
 -----
 

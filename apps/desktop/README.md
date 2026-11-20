@@ -89,7 +89,7 @@ The tray renderer enlarges the whale by 20% around the tile center while preserv
 
 ## Key technical decisions
 
-The original artwork lives in `resources/icon.png` and `resources/icon.svg`; platform adaptations retain the whale and gradients in `resources/icon-windows.*` and `resources/icon-macos.*`. Export each platform SVG as a transparent 1024×1024 PNG. Electron-builder generates the multi-size ICO for the Windows application, installer, and uninstaller ([Windows icon requirements](https://learn.microsoft.com/en-us/windows/apps/design/iconography/app-icon-construction)). The installation pages use matching artwork in both themes; the uninstaller's welcome and finish pages share `installer/assets/uninstaller-sidebar.png`, converted to a 164×314 BMP during preparation.
+The Windows installer displays Changxing Zhiyou (长行智友) and selects its light, dark, and high-DPI graphics from `installer/assets/`. The installer and Windows application icon use `resources/icon-windows.png`. Launch scripts use `DeepSeek Harness.exe`. Uninstaller welcome and completion pages share `installer/assets/uninstaller-sidebar.png`, which preparation converts to a 164×314 BMP.
 
 Shortcut overrides are stored in `app.getPath('userData')/keybindings.json`, separately from `DSH_HOME`. The main process validates and serializes changes before publishing accepted bindings. Failed reads retain the last accepted bindings and block edits, including Restore All; unreadable and future-version files remain unchanged. Development can isolate these preferences with `DSH_DESKTOP_USER_DATA_DIR`; the launcher prints its resolved path. See the [shortcut service](../../packages/client/shortcuts/README.md) for format and conflict semantics.
 
