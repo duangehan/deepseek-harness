@@ -36,15 +36,15 @@ describe('desktop build version discovery', () => {
   })
 
   it('numbers a stable product version under the documented test prerelease', async () => {
-    const artifactsRoot = await artifactsWith([`deepseek-harness-${STABLE}-test.${DATE}.4-win-x64.exe`])
+    const artifactsRoot = await artifactsWith([`changhangzhiyou-harness-${STABLE}-test.${DATE}.4-win-x64.exe`])
     await expect(suggestDesktopBuildVersion({ productVersion: STABLE, target: 'win-x64', environment: {}, date: DATE, artifactsRoot }))
       .resolves.toBe(`${STABLE}-test.${DATE}.5`)
   })
 
   it('numbers after the highest local artifact for the same date', async () => {
     const artifactsRoot = await artifactsWith([
-      `deepseek-harness-${PRERELEASE}.${DATE}.1-win-x64.exe`,
-      `deepseek-harness-${PRERELEASE}.${DATE}.2-win-x64.exe`,
+      `changhangzhiyou-harness-${PRERELEASE}.${DATE}.1-win-x64.exe`,
+      `changhangzhiyou-harness-${PRERELEASE}.${DATE}.2-win-x64.exe`,
       `deepseek-harness-${PRERELEASE}.${DATE}.10-win-x64.exe`,
     ])
     await expect(suggestDesktopBuildVersion({ productVersion: PRERELEASE, target: 'win-x64', environment: {}, date: DATE, artifactsRoot }))
@@ -53,9 +53,9 @@ describe('desktop build version discovery', () => {
 
   it('ignores artifacts from another date or product version', async () => {
     const artifactsRoot = await artifactsWith([
-      `deepseek-harness-${PRERELEASE}.20260920.7-win-x64.exe`,
-      `deepseek-harness-0.1.5-alpha.1.${DATE}.9-win-x64.exe`,
-      `deepseek-harness-${PRERELEASE}-win-x64.exe`,
+      `changhangzhiyou-harness-${PRERELEASE}.20260920.7-win-x64.exe`,
+      `changhangzhiyou-harness-0.1.5-alpha.1.${DATE}.9-win-x64.exe`,
+      `changhangzhiyou-harness-${PRERELEASE}-win-x64.exe`,
       'unrelated.exe',
     ])
     await expect(suggestDesktopBuildVersion({ productVersion: PRERELEASE, target: 'win-x64', environment: {}, date: DATE, artifactsRoot }))
@@ -83,8 +83,8 @@ describe('desktop build version discovery', () => {
 
   it('counts unsigned Windows artifacts written under their own suffix', async () => {
     const artifactsRoot = await artifactsWith([
-      `deepseek-harness-${PRERELEASE}.${DATE}.2-win-x64-unsigned.exe`,
-      `deepseek-harness-${PRERELEASE}.${DATE}.5-win-x64-unsigned.exe.blockmap`,
+      `changhangzhiyou-harness-${PRERELEASE}.${DATE}.2-win-x64-unsigned.exe`,
+      `changhangzhiyou-harness-${PRERELEASE}.${DATE}.5-win-x64-unsigned.exe.blockmap`,
     ])
     await expect(suggestDesktopBuildVersion({ productVersion: PRERELEASE, target: 'win-x64', environment: {}, date: DATE, artifactsRoot }))
       .resolves.toBe(`${PRERELEASE}.${DATE}.3`)

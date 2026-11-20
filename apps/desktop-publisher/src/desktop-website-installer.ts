@@ -4,7 +4,7 @@ import { open, lstat, type FileHandle } from 'node:fs/promises'
 import { join } from 'node:path'
 import type { DesktopRetainedManifest } from './desktop-release-store.ts'
 import type { DesktopPublishRoute } from './desktop-publish-route.ts'
-import { desktopLatestInstallerFilename, desktopWebsiteInstallerUrl } from './desktop-auto-update-environment.mjs'
+import { desktopArtifactPrefix, desktopLatestInstallerFilename, desktopWebsiteInstallerUrl } from './desktop-auto-update-environment.mjs'
 import { createDesktopCos, DESKTOP_COS_REGION, type DesktopCosCredentials } from './desktop-cos.ts'
 import { cosOperation } from './cos-operation.ts'
 import type { DesktopObjectDigest, DesktopPublishTransport } from './desktop-publish.ts'
@@ -41,8 +41,10 @@ export async function prepareWebsiteInstaller(directory: string, manifest: Deskt
     throw new Error('website installer: build identity or production qualification mismatch')
   }
   const windows = route.target === 'win-x64'
-  const filename = `deepseek-harness-${source.version}-${route.target}.${windows ? 'exe' : 'dmg'}`
+  const filename = `${desktopArtifactPrefix(windows)}-${source.version}-${route.target}.${windows ? 'exe' : 'dmg'}`
+  const legacyFilename = `deepseek-harness-${source.version}-${route.target}.exe`
   const file = manifest.files.find(item => item.name === filename)
+    ?? (windows ? manifest.files.find(item => item.name === legacyFilename) : undefined)
   if (!file) throw new Error('website installer: selected installer is absent from build manifest')
   const path = join(directory, file.name)
   const info = await lstat(path)

@@ -209,3 +209,12 @@ export function resolveDesktopUploadConfig(env, platform, arch) {
     secretKeyEnvName: deployment.secretKeyEnvName,
   }
 }
+
+/**
+ * Get the filename prefix for a versioned Desktop artifact.
+ * @param {boolean} windows - Whether the artifact targets Windows.
+ * @returns {string} The prefix before the version segment.
+ */
+export function desktopArtifactPrefix(windows) {
+  return windows ? 'changhangzhiyou-harness' : 'deepseek-harness'
+}

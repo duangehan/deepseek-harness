@@ -120,3 +120,10 @@ export function resolveDesktopUpdateChannel(env: NodeJS.ProcessEnv): 'nightly' |
  * @returns Trimmed setting value.
  */
 export function requiredEnvironmentValue(env: NodeJS.ProcessEnv, name: string): string
+
+/**
+ * Get the filename prefix for a versioned Desktop artifact.
+ * @param windows - Whether the artifact targets Windows.
+ * @returns The prefix before the version segment.
+ */
+export function desktopArtifactPrefix(windows: boolean): string
